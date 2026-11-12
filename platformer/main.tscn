@@ -1,0 +1,36 @@
+[gd_scene format=3 uid="uid://bxrt11txmu6ao"]
+
+[ext_resource type="PackedScene" uid="uid://cs3gab64wevu0" path="res://platformer/player.tscn" id="1_qt604"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_bj4t2"]
+size = Vector2(700, 38)
+
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bj4t2"]
+size = Vector2(700, 38)
+
+[node name="Main" type="Node2D" unique_id=887529344]
+
+[node name="Player" parent="." unique_id=184569890 instance=ExtResource("1_qt604")]
+position = Vector2(566, 326)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=201526542]
+position = Vector2(968, 396)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1211727650]
+shape = SubResource("RectangleShape2D_bj4t2")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=316236168]
+texture = SubResource("PlaceholderTexture2D_bj4t2")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1747055928]
+position = Vector2(569, 428)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=733012624]
+shape = SubResource("RectangleShape2D_bj4t2")
+
+[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2" unique_id=1890148680]
+texture = SubResource("PlaceholderTexture2D_bj4t2")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1475970936]
+position = Vector2(575, 374)
+zoom = Vector2(4, 4)
