@@ -58,6 +58,7 @@ Right={
 [physics]
 
 3d/physics_engine="Jolt Physics"
+2d/default_gravity=5000.0
 
 [plugins]
 
@@ -72,3 +73,4 @@ ai_assistant_hub/options/debug_http_content=false
 [rendering]
 
 rendering_device/driver.windows="d3d12"
+environment/defaults/default_clear_color=Color(1, 1, 1, 1)

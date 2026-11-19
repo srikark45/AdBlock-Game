@@ -1,25 +1,27 @@
 extends CharacterBody2D
 
-const initial_speed = 100 # initial dash from a standstill
-const max_speed = 200
-const acceleration = 200 # when moving foward
-const deceleration = 700 # when moving backward
-const friction_per_s = 300 # when not moving
+const initial_speed = 400 # initial dash from a standstill
+const max_speed = 1200
+const acceleration = 1200 # when moving foward
+const deceleration = 3500 # when moving backward
+const friction_per_s = 2000 # when not moving
 const air_factor = 0.5 # reduce accleration in midair
 
-const jump_impulse = 150 # initial jump speed
-const jump_duration_s = 1.0 # maximum floaty time when holding jump
+const jump_impulse = 900 # initial jump speed
+const jump_end_impulse = 450 # downward impulse on jump release
+const jump_duration_s = 0.6 # maximum floaty time when holding jump
 
 const jump_input_buffer_duration = 0.1 # you can jump just before hitting the ground
 const coyote_duration = 0.1 # you can jump just after walking off a ledge
-const postponed_gravity_factor = .5 # how fast you descend after releasing jump
 
 var jump_input_held_time = 0 # how long jump button has been held
 var jump_time = 0 # how long jump action has occurred
 var coyote_time = 0 # how long since leaving the ground
-var postponed_gravity = 0 # downward force applied after releasing jump
 
 func _physics_process(_delta):
+	if Input.is_action_just_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://UI/main_menu.tscn")
+	
 	var right_direction = -up_direction.orthogonal()
 	var velocity_r = velocity.dot(right_direction)
 	var input_r = Input.get_axis("Left", "Right")
@@ -28,12 +30,18 @@ func _physics_process(_delta):
 	match [int(sign(velocity_r)), int(sign(input_r))]:
 		[_, 0]:
 			# when passively sliding to a stop
+			$AnimatedSprite2D.animation = "stand"
 			velocity_r = move_toward(velocity_r, 0, friction_per_s * _delta * accel_mult)
 		[1, -1], [-1, 1]:
 			# when actively reversing direction
+			$AnimatedSprite2D.animation = "walk"
+			$AnimatedSprite2D.flip_h = input_r < 0
 			velocity_r = move_toward(velocity_r, 0, deceleration * _delta * accel_mult)
 		_:
-			if abs(velocity_r) < initial_speed:
+			# accelerating
+			$AnimatedSprite2D.animation = "walk"
+			$AnimatedSprite2D.flip_h = input_r < 0
+			if abs(velocity_r) < initial_speed * accel_mult:
 				# initial burst of speed from a standstill
 				velocity_r = input_r * initial_speed * accel_mult
 			else:
@@ -44,8 +52,8 @@ func _physics_process(_delta):
 	if is_on_floor():
 		coyote_time = 0
 		jump_time = 999
-		postponed_gravity = 0
 	else:
+		$AnimatedSprite2D.animation = "jump"
 		coyote_time += _delta
 	
 	if Input.is_action_pressed("Jump"):
@@ -56,19 +64,16 @@ func _physics_process(_delta):
 			coyote_time = 999
 		jump_input_held_time += _delta
 	elif Input.is_action_just_released("Jump"):
+		# Apply downward force on jump end, diminishing with jump duration
+		velocity += get_gravity().normalized() * jump_end_impulse * max(0, 1 - jump_time / jump_duration_s)
 		jump_input_held_time = 0
 		jump_time = 999
-		# Apply downward force proportional to gravity ignored while holding the jump.
-		velocity += get_gravity() * postponed_gravity * postponed_gravity_factor
-		postponed_gravity = 0
 	
-	if jump_input_held_time >= jump_time:
-		# We have been holding jump since we left the ground.
-		if jump_time < jump_duration_s:
-			# Gravity is decreased early in the jump but increased later in the jump.
-			var jump_completion = jump_time / jump_duration_s
-			velocity += get_gravity() * _delta * jump_completion * 2
-			postponed_gravity += (1 - jump_completion * 2) * _delta
+	if jump_input_held_time >= jump_time and jump_time < jump_duration_s:
+		# We are holding a jump and have been since we left the ground.
+		# Gravity is decreased early in the jump.
+		var jump_completion = jump_time / jump_duration_s
+		velocity += get_gravity() * jump_completion * _delta
 		jump_time += _delta
 	else:
 		velocity += get_gravity() * _delta

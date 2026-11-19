@@ -1,36 +1,50 @@
 [gd_scene format=3 uid="uid://bxrt11txmu6ao"]
 
 [ext_resource type="PackedScene" uid="uid://cs3gab64wevu0" path="res://platformer/player.tscn" id="1_qt604"]
+[ext_resource type="Theme" uid="uid://dqemfcn7a82bj" path="res://platformer/background_text_theme.tres" id="2_hqbv0"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bj4t2"]
-size = Vector2(700, 38)
+size = Vector2(230, 26)
 
-[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_bj4t2"]
-size = Vector2(700, 38)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_hqbv0"]
+size = Vector2(214, 26)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_v0uhk"]
+size = Vector2(1324, 26)
 
 [node name="Main" type="Node2D" unique_id=887529344]
 
 [node name="Player" parent="." unique_id=184569890 instance=ExtResource("1_qt604")]
+z_index = 100
 position = Vector2(566, 326)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="." unique_id=201526542]
-position = Vector2(968, 396)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D" unique_id=1211727650]
-shape = SubResource("RectangleShape2D_bj4t2")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D" unique_id=316236168]
-texture = SubResource("PlaceholderTexture2D_bj4t2")
-
-[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=1747055928]
-position = Vector2(569, 428)
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=733012624]
-shape = SubResource("RectangleShape2D_bj4t2")
-
-[node name="Sprite2D" type="Sprite2D" parent="StaticBody2D2" unique_id=1890148680]
-texture = SubResource("PlaceholderTexture2D_bj4t2")
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1475970936]
 position = Vector2(575, 374)
-zoom = Vector2(4, 4)
+
+[node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=63652740]
+offset_left = 181.0
+offset_top = 59.0
+offset_right = 949.0
+offset_bottom = 567.0
+theme = ExtResource("2_hqbv0")
+bbcode_enabled = true
+text = "lorem ipsum dolor sit amet consectetur adipiscing elit consequat eum ipsum fugiat excepturi enim in voluptatum id in eu in mollit minim enim imperdiet mollit cumque [color=blue][u]aute voluptatum[/u][/color] quo ullamco non accusamus deleniti excepteur velit vel et esse harum cupidatat nisi vel accusamus do pariatur est enim tempore deleniti est eos distinctio possimus odio cum mollitia et ex in quis qui cumque eos [color=blue][u]similique fugiat[/u][/color] labore nulla irure possimus aliquip vel molestias reprehenderit tempore fugiat tempor nihil possimus consequat blanditiis quod magna sunt dolores deleniti expedita pariatur in labore adipiscing sint nostrud aut esse nostrud excepteur laboris similique sit blanditiis reprehenderit est nisi commodo at deleniti et esse consequat minim amet provident voluptas quos optio officia aliquip soluta temporibus illum sit sunt et deserunt molestias est et est pariatur officia nisi cumque expedita exercitation sunt cum deserunt praesentium maxime enim duis id nostrud vel placeat iusto non nobis deleniti duis dolor eos sed similique id est vero voluptate laborum dolore vero officia quo pariatur fuga cumque dignissimos lorem sit et vel dignissimos reprehenderit est officia "
+scroll_active = false
+
+[node name="StaticBody2D" type="StaticBody2D" parent="RichTextLabel" unique_id=658494692]
+position = Vector2(316, 137)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RichTextLabel/StaticBody2D" unique_id=1067878337]
+shape = SubResource("RectangleShape2D_bj4t2")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="RichTextLabel" unique_id=288762524]
+position = Vector2(606, 292)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="RichTextLabel/StaticBody2D2" unique_id=1212457958]
+shape = SubResource("RectangleShape2D_hqbv0")
+
+[node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=449894809]
+position = Vector2(550, 516)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=862014413]
+shape = SubResource("RectangleShape2D_v0uhk")

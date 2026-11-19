@@ -1,17 +1,19 @@
 [gd_scene format=3 uid="uid://cs3gab64wevu0"]
 
 [ext_resource type="Script" uid="uid://cqqhjhpfre3j8" path="res://platformer/player.gd" id="1_dsss6"]
-[ext_resource type="Texture2D" uid="uid://bqjwrbgnbf5tn" path="res://icon.svg" id="2_ni0jc"]
+[ext_resource type="SpriteFrames" uid="uid://c6sfaletdftdx" path="res://platformer/player_frames.tres" id="2_dsss6"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_bj4t2"]
-size = Vector2(12.5, 12.5)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mqvok"]
+size = Vector2(67, 94)
 
 [node name="Player" type="CharacterBody2D" unique_id=184569890]
 script = ExtResource("1_dsss6")
 
-[node name="Sprite2D" type="Sprite2D" parent="." unique_id=793057673]
-scale = Vector2(0.1, 0.1)
-texture = ExtResource("2_ni0jc")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1612764098]
-shape = SubResource("RectangleShape2D_bj4t2")
+position = Vector2(0.5, -1)
+shape = SubResource("RectangleShape2D_mqvok")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1637349795]
+sprite_frames = ExtResource("2_dsss6")
+animation = &"walk"
+autoplay = "walk"
