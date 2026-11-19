@@ -2,6 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://cs3gab64wevu0" path="res://platformer/player.tscn" id="1_qt604"]
 [ext_resource type="Theme" uid="uid://dqemfcn7a82bj" path="res://platformer/background_text_theme.tres" id="2_hqbv0"]
+[ext_resource type="PackedScene" uid="uid://bfvuahsl3hsbb" path="res://ui/pause_menu.tscn" id="3_v0uhk"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bj4t2"]
 size = Vector2(230, 26)
@@ -48,3 +49,5 @@ position = Vector2(550, 516)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=862014413]
 shape = SubResource("RectangleShape2D_v0uhk")
+
+[node name="PauseMenu" parent="." unique_id=1101973040 instance=ExtResource("3_v0uhk")]
