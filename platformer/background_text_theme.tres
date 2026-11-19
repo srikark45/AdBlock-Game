@@ -2,4 +2,5 @@
 
 [resource]
 default_font_size = 28
+Label/colors/font_color = Color(0.36078432, 0.36078432, 0.36078432, 1)
 RichTextLabel/colors/default_color = Color(0.35906908, 0.35906908, 0.35906908, 1)

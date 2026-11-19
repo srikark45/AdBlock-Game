@@ -6,7 +6,11 @@
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mqvok"]
 size = Vector2(67, 94)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0h62n"]
+size = Vector2(67, 28)
+
 [node name="Player" type="CharacterBody2D" unique_id=184569890]
+collision_mask = 3
 script = ExtResource("1_dsss6")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=1612764098]
@@ -17,3 +21,11 @@ shape = SubResource("RectangleShape2D_mqvok")
 sprite_frames = ExtResource("2_dsss6")
 animation = &"walk"
 autoplay = "walk"
+
+[node name="StompArea" type="Area2D" parent="." unique_id=517613487]
+collision_layer = 0
+collision_mask = 8
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StompArea" unique_id=1430009631]
+position = Vector2(0.5, 60)
+shape = SubResource("RectangleShape2D_0h62n")

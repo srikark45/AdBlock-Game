@@ -3,6 +3,7 @@
 [ext_resource type="PackedScene" uid="uid://cs3gab64wevu0" path="res://platformer/player.tscn" id="1_qt604"]
 [ext_resource type="Theme" uid="uid://dqemfcn7a82bj" path="res://platformer/background_text_theme.tres" id="2_hqbv0"]
 [ext_resource type="PackedScene" uid="uid://bfvuahsl3hsbb" path="res://ui/pause_menu.tscn" id="3_v0uhk"]
+[ext_resource type="PackedScene" uid="uid://dqi7mdljcrsvg" path="res://platformer/StompTarget.tscn" id="4_kk7cb"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_bj4t2"]
 size = Vector2(230, 26)
@@ -19,9 +20,6 @@ size = Vector2(1324, 26)
 z_index = 100
 position = Vector2(566, 326)
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1475970936]
-position = Vector2(575, 374)
-
 [node name="RichTextLabel" type="RichTextLabel" parent="." unique_id=63652740]
 offset_left = 181.0
 offset_top = 59.0
@@ -34,20 +32,35 @@ scroll_active = false
 
 [node name="StaticBody2D" type="StaticBody2D" parent="RichTextLabel" unique_id=658494692]
 position = Vector2(316, 137)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RichTextLabel/StaticBody2D" unique_id=1067878337]
 shape = SubResource("RectangleShape2D_bj4t2")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="RichTextLabel" unique_id=288762524]
 position = Vector2(606, 292)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="RichTextLabel/StaticBody2D2" unique_id=1212457958]
 shape = SubResource("RectangleShape2D_hqbv0")
 
 [node name="StaticBody2D2" type="StaticBody2D" parent="." unique_id=449894809]
 position = Vector2(550, 516)
+collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=862014413]
 shape = SubResource("RectangleShape2D_v0uhk")
 
 [node name="PauseMenu" parent="." unique_id=1101973040 instance=ExtResource("3_v0uhk")]
+
+[node name="StompTarget" parent="." unique_id=716176423 instance=ExtResource("4_kk7cb")]
+position = Vector2(243, 503)
+
+[node name="StompTarget3" parent="." unique_id=1753691550 instance=ExtResource("4_kk7cb")]
+position = Vector2(831, 339)
+
+[node name="StompTarget2" parent="." unique_id=2110911514 instance=ExtResource("4_kk7cb")]
+position = Vector2(563, 181)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1475970936]
+position = Vector2(575, 374)
