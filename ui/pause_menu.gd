@@ -12,6 +12,8 @@ func _ready() -> void:
 	$Panel/VBox/Quit.pressed.connect(_quit)
 
 func _unhandled_input(event: InputEvent) -> void:
+	if get_tree().get_first_node_in_group("end_screen") != null:
+		return
 	if event.is_action_pressed("Pause"):
 		get_viewport().set_input_as_handled()
 		if get_tree().paused:

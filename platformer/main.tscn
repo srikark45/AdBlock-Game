@@ -5,6 +5,7 @@
 [ext_resource type="Theme" uid="uid://dqemfcn7a82bj" path="res://platformer/background_text_theme.tres" id="2_hqbv0"]
 [ext_resource type="PackedScene" uid="uid://bfvuahsl3hsbb" path="res://ui/pause_menu.tscn" id="3_v0uhk"]
 [ext_resource type="PackedScene" uid="uid://dqi7mdljcrsvg" path="res://platformer/StompTarget.tscn" id="4_kk7cb"]
+[ext_resource type="PackedScene" uid="uid://bj66hmd8wtily" path="res://ui/victory_screen.tscn" id="6_84s7p"]
 [ext_resource type="Script" path="res://platformer/page_camera.gd" id="5_camera"]
 
 [sub_resource type="WorldBoundaryShape2D" id="LeftEdge"]
@@ -94,7 +95,8 @@ position = Vector2(563, 181)
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1475970936 node_paths=PackedStringArray("player")]
 position = Vector2(576, 326)
-offset = Vector2(0, -80)
 process_callback = 0
 script = ExtResource("5_camera")
 player = NodePath("../Player")
+
+[node name="VictoryScreen" parent="." unique_id=710399741 instance=ExtResource("6_84s7p")]
