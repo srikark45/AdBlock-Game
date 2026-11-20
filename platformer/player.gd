@@ -78,7 +78,7 @@ func _physics_process(_delta):
 		# check if we are mostly on the ground, with some timing tolerance.
 		if coyote_time <= coyote_duration and jump_input_held_time <= jump_input_buffer_duration:
 			if last_surface_normal.y < -.7: # floor jump
-				velocity = floor_jump_impulse * up_direction
+				velocity = velocity.slide(up_direction) + floor_jump_impulse * up_direction
 			else: # wall jump
 				var x_dir = sign(last_surface_normal.x)
 				velocity = wall_jump_impulse_horizontal * x_dir * Vector2.RIGHT \
