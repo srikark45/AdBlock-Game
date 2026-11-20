@@ -1,12 +1,11 @@
 [gd_scene format=3 uid="uid://bj66hmd8wtily"]
 
-[ext_resource type="Script" uid="uid://de2o3536jmr1q" path="res://ui/victory_screen.gd" id="1_oh8u7"]
+[ext_resource type="Script" uid="uid://3l0x0s5qae53" path="res://ui/victory_screen.gd" id="1_oh8u7"]
 
 [node name="VictoryScreen" type="CanvasLayer" unique_id=710399741]
 script = ExtResource("1_oh8u7")
 
 [node name="Panel" type="Panel" parent="." unique_id=2064498976]
-visible = false
 custom_minimum_size = Vector2(260, 180)
 anchors_preset = 8
 anchor_left = 0.5
@@ -21,9 +20,12 @@ grow_horizontal = 2
 grow_vertical = 2
 
 [node name="VBox" type="VBoxContainer" parent="Panel" unique_id=1656549168]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
 [node name="Title" type="Label" parent="Panel/VBox" unique_id=851008619]
 layout_mode = 2

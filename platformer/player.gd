@@ -7,10 +7,10 @@ const deceleration = 3500 # when moving backward
 const friction_per_s = 2000 # when not moving
 const air_factor = 0.5 # reduce accleration in midair
 
-const jump_impulse = 900 # initial jump speed
-const wall_jump_impulse_vertical = 600 # initial jump speed
-const wall_jump_impulse_horizontal = 600 # initial jump speed
-const jump_end_impulse = 450 # downward impulse on jump release
+const floor_jump_impulse = 700 # initial jump speed
+const wall_jump_impulse_vertical = 500 # initial jump speed
+const wall_jump_impulse_horizontal = 500 # initial jump speed
+const jump_end_impulse = 350 # downward impulse on jump release
 const jump_duration_s = 0.6 # maximum floaty time when holding jump
 
 const jump_input_buffer_duration = 0.1 # you can jump just before hitting the ground
@@ -77,19 +77,19 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("Jump"):
 		# check if we are mostly on the ground, with some timing tolerance.
 		if coyote_time <= coyote_duration and jump_input_held_time <= jump_input_buffer_duration:
-			if last_surface_normal.y > .7:
-				velocity = jump_impulse * up_direction
+			if last_surface_normal.y < -.7: # floor jump
+				velocity = floor_jump_impulse * up_direction
 			else: # wall jump
 				var x_dir = sign(last_surface_normal.x)
 				velocity = wall_jump_impulse_horizontal * x_dir * Vector2.RIGHT \
 						+ wall_jump_impulse_vertical * up_direction
 			jump_time = 0
 			coyote_time = 999
-			jump_input_held_time = 2 # prevents double-triggering via input buffer
+			jump_input_held_time = 2 # prevents wall jump from instantly triggering
 		jump_input_held_time += _delta
 	elif Input.is_action_just_released("Jump"):
 		# Apply downward force on jump end, diminishing with jump duration
-		velocity += up_direction * jump_end_impulse * max(0, 1 - jump_time / jump_duration_s)
+		velocity += up_direction * -jump_end_impulse * max(0, 1 - jump_time / jump_duration_s)
 		jump_input_held_time = 0
 		jump_time = 999
 	

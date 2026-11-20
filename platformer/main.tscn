@@ -62,6 +62,15 @@ position = Vector2(1046, 321)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=39758719]
+position = Vector2(-944, 1)
+shape = SubResource("RectangleShape2D_v0uhk")
+
+[node name="StaticBody2D4" type="StaticBody2D" parent="." unique_id=148235829]
+position = Vector2(1046, 321)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4" unique_id=1236331098]
+position = Vector2(-67, -6)
 shape = SubResource("RectangleShape2D_v0uhk")
 
 [node name="PauseMenu" parent="." unique_id=1101973040 instance=ExtResource("3_v0uhk")]
