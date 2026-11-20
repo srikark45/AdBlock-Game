@@ -8,6 +8,8 @@ const friction_per_s = 2000 # when not moving
 const air_factor = 0.5 # reduce accleration in midair
 
 const jump_impulse = 900 # initial jump speed
+const wall_jump_impulse_vertical = 600 # initial jump speed
+const wall_jump_impulse_horizontal = 600 # initial jump speed
 const jump_end_impulse = 450 # downward impulse on jump release
 const jump_duration_s = 0.6 # maximum floaty time when holding jump
 
@@ -19,6 +21,7 @@ const stomp_speed = 1500 # maximum floaty time when holding jump
 var jump_input_held_time = 0 # how long jump button has been held
 var jump_time = 0 # how long jump action has occurred
 var coyote_time = 0 # how long since leaving the ground
+var last_surface_normal = Vector2.UP # last touched a wall vs. a floor
 
 var is_stomping = false
 
@@ -26,7 +29,7 @@ func _physics_process(_delta):
 	if Input.is_action_just_pressed("Stomp"):
 			is_stomping = true
 	if is_stomping:
-		velocity = stomp_speed * get_gravity().normalized()
+		velocity = stomp_speed * -up_direction
 	else:
 		var right_direction = -up_direction.orthogonal()
 		var velocity_r = velocity.dot(right_direction)
@@ -58,11 +61,15 @@ func _physics_process(_delta):
 	if is_on_floor():
 		coyote_time = 0
 		jump_time = 999
+		last_surface_normal = get_floor_normal()
 		if is_stomping:
 			# Land from an air stomp
 			is_stomping = false
 			for stompable in $StompArea.get_overlapping_areas():
 				stompable.receive_stomp() # Everything in collision layer 4 should implement this!
+	elif is_on_wall():
+		last_surface_normal = get_wall_normal()
+		coyote_time = 0
 	else:
 		$AnimatedSprite2D.animation = "jump"
 		coyote_time += _delta
@@ -70,13 +77,19 @@ func _physics_process(_delta):
 	if Input.is_action_pressed("Jump"):
 		# check if we are mostly on the ground, with some timing tolerance.
 		if coyote_time <= coyote_duration and jump_input_held_time <= jump_input_buffer_duration:
-			velocity = jump_impulse * up_direction
+			if last_surface_normal.y > .7:
+				velocity = jump_impulse * up_direction
+			else: # wall jump
+				var x_dir = sign(last_surface_normal.x)
+				velocity = wall_jump_impulse_horizontal * x_dir * Vector2.RIGHT \
+						+ wall_jump_impulse_vertical * up_direction
 			jump_time = 0
 			coyote_time = 999
+			jump_input_held_time = 2 # prevents double-triggering via input buffer
 		jump_input_held_time += _delta
 	elif Input.is_action_just_released("Jump"):
 		# Apply downward force on jump end, diminishing with jump duration
-		velocity += get_gravity().normalized() * jump_end_impulse * max(0, 1 - jump_time / jump_duration_s)
+		velocity += up_direction * jump_end_impulse * max(0, 1 - jump_time / jump_duration_s)
 		jump_input_held_time = 0
 		jump_time = 999
 	

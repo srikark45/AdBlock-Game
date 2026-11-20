@@ -12,8 +12,11 @@ size = Vector2(230, 26)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_hqbv0"]
 size = Vector2(214, 26)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_dxk18"]
+size = Vector2(1136, 32)
+
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_v0uhk"]
-size = Vector2(1324, 26)
+size = Vector2(58, 660)
 
 [node name="Main" type="Node2D" unique_id=887529344]
 script = ExtResource("1_dxk18")
@@ -51,6 +54,13 @@ position = Vector2(550, 516)
 collision_layer = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2" unique_id=862014413]
+shape = SubResource("RectangleShape2D_dxk18")
+
+[node name="StaticBody2D3" type="StaticBody2D" parent="." unique_id=711736562]
+position = Vector2(1046, 321)
+collision_layer = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3" unique_id=39758719]
 shape = SubResource("RectangleShape2D_v0uhk")
 
 [node name="PauseMenu" parent="." unique_id=1101973040 instance=ExtResource("3_v0uhk")]
