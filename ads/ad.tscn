@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3]
+
+[ext_resource type="Script" path="res://ads/ad.gd" id="1_ad"]
+[ext_resource type="PackedScene" uid="uid://dqi7mdljcrsvg" path="res://platformer/StompTarget.tscn" id="2_x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ad"]
+bg_color = Color(1, 0.96, 0.75, 1)
+border_width_left = 3
+border_width_top = 3
+border_width_right = 3
+border_width_bottom = 3
+border_color = Color(0.45, 0.45, 0.45, 1)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ad"]
+resource_local_to_scene = true
+size = Vector2(130, 78)
+
+[node name="Ad" type="Node2D"]
+script = ExtResource("1_ad")
+
+[node name="Panel" type="Panel" parent="."]
+offset_right = 130.0
+offset_bottom = 78.0
+mouse_filter = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_ad")
+
+[node name="Label" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+clip_text = true
+theme_override_colors/font_color = Color(0.85, 0.1, 0.1, 1)
+theme_override_font_sizes/font_size = 20
+text = "BUY NOW!"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="Body" type="StaticBody2D" parent="."]
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Body"]
+position = Vector2(65, 39)
+shape = SubResource("RectangleShape2D_ad")
+
+[node name="CloseButton" parent="." instance=ExtResource("2_x")]
+position = Vector2(110, 16)
+
+[connection signal="stomped" from="CloseButton" to="." method="_on_close_button_stomped"]

@@ -4,7 +4,8 @@
 [ext_resource type="PackedScene" uid="uid://cs3gab64wevu0" path="res://platformer/player.tscn" id="1_qt604"]
 [ext_resource type="Theme" uid="uid://dqemfcn7a82bj" path="res://platformer/background_text_theme.tres" id="2_hqbv0"]
 [ext_resource type="PackedScene" uid="uid://bfvuahsl3hsbb" path="res://ui/pause_menu.tscn" id="3_v0uhk"]
-[ext_resource type="PackedScene" uid="uid://dqi7mdljcrsvg" path="res://platformer/StompTarget.tscn" id="4_kk7cb"]
+[ext_resource type="PackedScene" path="res://ads/ad.tscn" id="4_ad"]
+[ext_resource type="PackedScene" path="res://ads/jump_pad.tscn" id="7_pad"]
 [ext_resource type="Script" uid="uid://vbk1lhn3lhe6" path="res://platformer/page_camera.gd" id="5_camera"]
 [ext_resource type="PackedScene" uid="uid://bj66hmd8wtily" path="res://ui/victory_screen.tscn" id="6_84s7p"]
 
@@ -93,14 +94,21 @@ shape = SubResource("LeftEdge")
 position = Vector2(1148, 0)
 shape = SubResource("RightEdge")
 
-[node name="StompTarget" parent="." unique_id=716176423 instance=ExtResource("4_kk7cb")]
-position = Vector2(243, 503)
+[node name="FloorAd" parent="." instance=ExtResource("4_ad")]
+position = Vector2(395, 422)
+text = "BUY NOW!"
 
-[node name="StompTarget3" parent="." unique_id=1753691550 instance=ExtResource("4_kk7cb")]
-position = Vector2(831, 339)
+[node name="LinkAd" parent="." instance=ExtResource("4_ad")]
+position = Vector2(760, 260)
+text = "CLICK ME"
 
-[node name="StompTarget2" parent="." unique_id=2110911514 instance=ExtResource("4_kk7cb")]
-position = Vector2(563, 181)
+[node name="TopAd" parent="." instance=ExtResource("4_ad")]
+position = Vector2(385, 105)
+text = "HOT DEALS"
+
+[node name="JumpPad" parent="." instance=ExtResource("7_pad")]
+position = Vector2(230, 484)
+launch_speed = 2300.0
 
 [node name="Camera2D" type="Camera2D" parent="." unique_id=1475970936 node_paths=PackedStringArray("player")]
 position = Vector2(576, 326)
