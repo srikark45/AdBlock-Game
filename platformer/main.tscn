@@ -1,5 +1,6 @@
 [gd_scene format=3 uid="uid://bxrt11txmu6ao"]
 
+[ext_resource type="Script" uid="uid://vq6gg1lek03o" path="res://platformer/game.gd" id="1_dxk18"]
 [ext_resource type="PackedScene" uid="uid://cs3gab64wevu0" path="res://platformer/player.tscn" id="1_qt604"]
 [ext_resource type="Theme" uid="uid://dqemfcn7a82bj" path="res://platformer/background_text_theme.tres" id="2_hqbv0"]
 [ext_resource type="PackedScene" uid="uid://bfvuahsl3hsbb" path="res://ui/pause_menu.tscn" id="3_v0uhk"]
@@ -15,6 +16,7 @@ size = Vector2(214, 26)
 size = Vector2(1324, 26)
 
 [node name="Main" type="Node2D" unique_id=887529344]
+script = ExtResource("1_dxk18")
 
 [node name="Player" parent="." unique_id=184569890 instance=ExtResource("1_qt604")]
 z_index = 100

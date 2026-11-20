@@ -1,3 +1,4 @@
+class_name StompTarget
 extends Area2D
 
 signal stomped
